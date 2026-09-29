@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Special Editions Showcase | Collector Bookazines</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
@@ -564,6 +565,60 @@ document.getElementById('ambientGlow').style.backgroundColor = pub.glowColor || 
     renderShowcase(0);
     renderTabs();
     renderCatalogGrid();
+    // -------------------------------------------------------------
+  // Live Google Sheets Background Feed (Safe Fallback)
+  // -------------------------------------------------------------
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3ey1cUppIksyKFidadOPT6GsoLyTAtNJ2N6YDMQEtsrKFBAOm1m9hzfQuT19jg-7fkRwUtnHazvok/pub?output=csv";
+
+  async function updateFeedFromGoogleSheets() {
+    try {
+      const cacheBuster = SHEET_CSV_URL + "&t=" + Date.now();
+      const response = await fetch(cacheBuster);
+      if (!response.ok) return;
+      const csvText = await response.text();
+
+      Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          const freshData = results.data
+            .filter(row => row.title && row.title.trim() !== "")
+            .map(row => ({
+              id: (row.id || "").trim(),
+              title: (row.title || "").trim(),
+              shortTitle: (row.shortTitle || row.title || "").trim(),
+              subtitleTag: (row.subtitleTag || "").trim(),
+              coverImage: (row.coverImage || "").trim(),
+              spreadImage: (row.spreadImage || row.coverImage || "").trim(),
+              price: (row.price || "£10.99").trim(),
+              isbn: (row.isbn || "").trim(),
+              pages: (row.pages || "116 Pages").trim(),
+              releaseDate: (row.releaseDate || "").trim(),
+              shopUrl: (row.shopUrl || "https://shop.keypublishing.com").trim(),
+              fullSynopsis: (row.fullSynopsis || "").trim(),
+              standfirst: (row.standfirst || "").trim(),
+              highlights: row.highlights ? row.highlights.split("|").map(h => h.trim()).filter(Boolean) : [],
+              glowColor: (row.glowColor || "rgba(217, 119, 6, 0.25)").trim()
+            }));
+
+          if (freshData.length > 0) {
+            // Replace array in-place so hardcoded fallback cleanly upgrades
+            publications.splice(0, publications.length, ...freshData);
+            renderTabs();
+            renderShowcase(0);
+            renderCatalogGrid();
+            if (window.lucide) lucide.createIcons();
+            console.log("Live feed loaded successfully:", freshData.length, "publications.");
+          }
+        }
+      });
+    } catch (err) {
+      console.warn("Retaining hardcoded titles; live feed fetch bypassed:", err);
+    }
+  }
+
+  // Trigger background sync after initial paint
+  updateFeedFromGoogleSheets();
   </script>
 </body>
 </html>
