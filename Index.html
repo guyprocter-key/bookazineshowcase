@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Editions Showcase | Collector Bookazines</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Cinzel', 'serif'],
+            display: ['Oswald', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-preserve-3d { transform-style: preserve-3d; }
+    .cover-card {
+      transition: transform 0.15s ease-out, box-shadow 0.2s ease-out;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-950/85 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Key Publishing Brand Block (Flush, Clean Layout) -->
+      <div class="flex items-center">
+        <a href="#showcase" class="flex items-center gap-3.5 group">
+          <img 
+            src="key-logo.png" 
+            alt="Key Publishing" 
+            class="h-10 w-auto rounded shadow-sm object-contain select-none"
+            onerror="this.style.display='none'; document.getElementById('keyFallbackText').style.display='block';"
+          >
+          <div id="keyFallbackText" class="hidden">
+            <span class="font-serif font-black tracking-tight text-white text-xl uppercase italic">KEY</span>
+          </div>
+          <div class="border-l border-slate-800 pl-3.5 flex flex-col justify-center">
+            <span class="text-[11px] font-semibold uppercase tracking-widest text-slate-400 block group-hover:text-amber-400 transition-colors leading-none mb-1">Special Editions</span>
+            <span class="font-display text-lg tracking-wide uppercase font-bold text-white leading-tight">Bookazine Showcase</span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="flex items-center space-x-3 sm:space-x-6 text-sm">
+        <button onclick="scrollToSection('showcase')" class="text-slate-300 hover:text-white transition font-medium">Spotlight</button>
+        <button onclick="scrollToSection('catalog')" class="text-slate-300 hover:text-white transition font-medium">Full Catalogue</button>
+        <a href="#catalog" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold px-4 py-2 rounded-lg transition text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20">
+          Order Issues
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Interactive Spotlight Section -->
+    <section id="showcase" class="relative pt-8 pb-20 overflow-hidden border-b border-slate-800">
+      <div id="ambientGlow" class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[520px] rounded-full blur-[140px] pointer-events-none transition-all duration-700"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Dynamic Tabs Navigation -->
+        <div class="flex justify-start md:justify-center mb-10 overflow-x-auto custom-scrollbar pb-3">
+          <div id="tabsContainer" class="inline-flex p-1.5 rounded-2xl bg-slate-900 border border-slate-800 shadow-inner gap-1">
+            <!-- Tabs injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Spotlight Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- 3D Interactive Cover Presentation with Click-to-Spread Trigger -->
+          <div class="lg:col-span-5 flex flex-col items-center">
+            <div class="perspective-1000 w-full max-w-[360px]">
+              <div id="tiltWrapper" onclick="openSpreadModal()" class="cover-card transform-style-preserve-3d relative rounded-xl shadow-2xl overflow-hidden border border-slate-700 bg-slate-900 cursor-pointer aspect-[1/1.414] group">
+                <img id="displayCover" src="" alt="Publication Cover" class="w-full h-full object-contain select-none">
+                <div id="glareOverlay" class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none opacity-0 transition-opacity duration-300"></div>
+                
+                <!-- Click to View DPS Hover Badge Overlay -->
+                <div class="absolute inset-0 bg-slate-950/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center p-4">
+                  <span class="bg-amber-500 text-slate-950 font-display text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg shadow-xl flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    Inspect Inside Spread
+                  </span>
+                </div>
+
+                <div class="absolute bottom-3 right-3 bg-slate-950/85 backdrop-blur-md px-3 py-1 rounded text-[11px] font-mono tracking-widest text-slate-300 border border-slate-700">
+                  <span id="displayBadge">A4 | COLLECTOR SPEC</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-4 tracking-wider flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+              Click cover to open sample double-page spread
+            </p>
+          </div>
+
+          <!-- Publication Information -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20" id="displaySubtitleTag">
+              <!-- Subtitle Tag -->
+            </div>
+
+            <h1 id="displayTitle" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              <!-- Title -->
+            </h1>
+
+            <p id="displayStandfirst" class="text-slate-400 text-base sm:text-lg leading-relaxed font-normal">
+              <!-- Standfirst -->
+            </p>
+
+            <!-- Specification Badges -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-slate-800" id="displaySpecs">
+              <!-- Specs injected dynamically -->
+            </div>
+
+            <!-- Key Feature Highlights -->
+            <div>
+              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Editorial Focus & Highlights</span>
+              <ul id="displayHighlights" class="space-y-2 text-sm text-slate-300">
+                <!-- Highlights injected dynamically -->
+              </ul>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex flex-wrap items-center gap-4 pt-4">
+              <a id="displayBuyBtn" href="https://shop.keypublishing.com" target="_blank" class="px-8 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-bold text-base tracking-wider uppercase transition shadow-xl shadow-amber-500/20 inline-flex items-center gap-2">
+                <span>Order Publication</span>
+                <span id="displayPriceBadge" class="bg-slate-950/20 px-2 py-0.5 rounded text-sm">£10.99</span>
+              </a>
+              <button onclick="openFeatureModal()" class="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm border border-slate-700 transition inline-flex items-center gap-2">
+                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <span>Read Full Synopsis</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Complete Publications Grid -->
+    <section id="catalog" class="py-20 bg-slate-900/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-xs font-semibold uppercase tracking-widest text-amber-400 block mb-2">Current Range</span>
+          <h2 class="font-serif text-3xl font-bold text-white">Explore the Full Series Collection</h2>
+          <p class="text-slate-400 text-sm mt-3">Authoritative, archival specials printed on heavyweight paper stock featuring in-depth analysis and technical photography.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="catalogCardsContainer">
+          <!-- Catalog cards injected dynamically -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Editorial Text Modal -->
+  <div id="editorialModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl text-left">
+      <button onclick="closeFeatureModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <span id="modalEyebrow" class="text-xs font-semibold text-amber-400 tracking-wider uppercase block mb-1">Archival Synopsis</span>
+      <h3 id="modalTitle" class="font-serif text-2xl font-bold text-white mb-4">Title</h3>
+      <div id="modalBody" class="text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 max-h-[60vh] overflow-y-auto pr-3 custom-scrollbar">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+        <button onclick="closeFeatureModal()" class="px-5 py-2 rounded-lg bg-slate-800 text-slate-200 text-sm font-medium hover:bg-slate-700 transition">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Double Page Spread (DPS) Lightbox Modal -->
+  <div id="spreadModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6" onclick="handleSpreadBackdropClick(event)">
+    <div class="relative max-w-6xl w-full bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-4 sm:p-6 flex flex-col items-center">
+      <div class="w-full flex items-center justify-between pb-3 mb-3 border-b border-slate-800">
+        <div>
+          <span class="text-[10px] font-mono tracking-widest uppercase text-amber-400 block">Sample Inside Spread</span>
+          <h3 id="spreadModalTitle" class="font-serif text-lg font-bold text-white leading-tight"></h3>
+        </div>
+        <button onclick="closeSpreadModal()" class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Spread Image Display Frame (Full Uncropped Horizontal View) -->
+      <div class="w-full max-h-[75vh] flex items-center justify-center overflow-hidden rounded-xl bg-slate-950 border border-slate-800 p-2">
+        <img id="spreadImageEl" src="" alt="Double Page Spread Preview" class="max-h-[72vh] w-auto max-w-full object-contain shadow-2xl select-none">
+      </div>
+
+      <div class="w-full flex justify-between items-center mt-3 pt-2 text-xs text-slate-400">
+        <span>Click outside or press Esc to return</span>
+        <button onclick="closeSpreadModal()" class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-medium transition">
+          Close Spread
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="border-t border-slate-800 py-10 bg-slate-950 text-center text-xs text-slate-500">
+    <p>© 2026 Key Publishing Ltd. Published in Great Britain.</p>
+  </footer>
+
+  <script>
+    // Complete Publications Dataset with Spread Image references
+    const publications = [
+      {
+        id: "fighter-command",
+        title: "Fighter Command: 90th Anniversary",
+        shortTitle: "Fighter Command",
+        subtitleTag: "From the Makers of Aeroplane",
+        coverImage: "9781836323259.jpg",
+        spreadImage: "fighter-command-dps.jpg",
+        price: "£10.99",
+        isbn: "9781836323259",
+        format: "Paperback / Softback (A4)",
+        pages: "116 Pages",
+        releaseDate: "29 October 2026",
+        shopUrl: "https://shop.keypublishing.com",
+        standfirst: "Marks 90 years since the RAF's Fighter Command was established in 1936, tracing its history from the tense pre-war years through the Battle of Britain, the Second World War and into the supersonic jet age.",
+        fullSynopsis: "Fighter Command: 90th Anniversary marks 90 years since the RAF’s Fighter Command was established in 1936, tracing its history from the tense pre-war years through the Battle of Britain, the Second World War and the early Cold War.\n\nThe bookazine explores the aircraft, squadrons, commanders, pilots and ground crews that made Fighter Command one of the world’s most famous air forces, from Hurricanes and Spitfires to Meteors, Hunters, Javelins, Lightnings and Phantoms.\n\nIt also examines the evolution of radar, tactics and air defence, culminating in Fighter Command’s disbandment in 1968 and the transfer of its responsibilities to the newly formed RAF Strike Command.",
+        highlights: [
+          "The Battle Begins: How Fighter Command stood alone in 1940 with the Dowding System.",
+          "The Men of The Few: Honouring the pilots, ground crew and the spirit of wartime Britain.",
+          "The Fight for the Skies: Tactical evolution from piston fighters to supersonic Mach 2 interceptors.",
+          "The Legacy: Radar integration, air defence doctrines and the transfer to Strike Command."
+        ],
+        glowColor: "rgba(30, 58, 138, 0.25)"
+      },
+      {
+        id: "classic-aviation",
+        title: "Classic Aviation: The Colouring Book",
+        shortTitle: "Classic Aviation",
+        subtitleTag: "Collector Illustrated Edition",
+        coverImage: "9781836323266.jpg",
+        spreadImage: "classic-aviation-dps.jpg",
+        price: "£9.99",
+        isbn: "9781836323266",
+        format: "Paperback / Softback (A4)",
+        pages: "116 Pages",
+        releaseDate: "29 October 2026",
+        shopUrl: "https://shop.keypublishing.com/products/classic-aviation-the-colouring-book",
+        standfirst: "From pioneering First World War biplanes to cutting-edge stealth aircraft, celebrate the icons that transformed aviation history across 55 hand-drawn master illustrations.",
+        fullSynopsis: "From the pioneering biplanes of the First World War to the cutting-edge stealth aircraft of the modern era, Classic Aviation: The Colouring Book celebrates the aircraft that changed the course of aviation history.\n\nFeaturing 55 illustrated pages to colour, this unique collection spans legendary fighters, bombers, airliners and helicopters, including the Spitfire, Lancaster, Concorde, Vulcan, SR-71 Blackbird and Boeing 747.\n\nEach illustration is accompanied by concise historical notes and key performance data, making this more than a colouring book. Whether you're an aviation enthusiast or simply enjoy creative relaxation, it's a rewarding journey through more than a century of flight.",
+        highlights: [
+          "55 Detailed Master Illustrations: Printed on high-grade single-sided art stock.",
+          "Legendary Aircraft Roster: Spitfire, Lancaster, Concorde, Vulcan, SR-71 and Boeing 747.",
+          "Concise Historical Notes: Key performance specifications, dimensions, and service contexts.",
+          "Creative Relaxation & Reference: Accurate line work ideal for scale enthusiasts and artists."
+        ],
+        glowColor: "rgba(217, 119, 6, 0.2)"
+      },
+      {
+        id: "usaf-yearbook",
+        title: "USAF Yearbook",
+        shortTitle: "USAF Yearbook",
+        subtitleTag: "Annual Air Power Review",
+        coverImage: "9781836323365.jpg",
+        spreadImage: "usaf-yearbook-dps.jpg",
+        price: "£10.99",
+        isbn: "9781836323365",
+        format: "Paperback / Softback (A4)",
+        pages: "116 Pages",
+        releaseDate: "Autumn 2026",
+        shopUrl: "https://shop.keypublishing.com",
+        standfirst: "An authoritative, in-depth look at every facet of America's air power, profiling the aircraft, strategic missions and front-line units defining the USAF today.",
+        fullSynopsis: "An authoritative, in-depth look at every facet of America’s air power. From front-line bombers and cutting-edge fighters to special operations platforms, heavy-lift transports and advanced trainers, it profiles the aircraft, missions and units that define the USAF today.\n\nRichly illustrated and packed with expert analysis, this essential annual charts current capabilities, key developments and the evolving role of the Air Force in a rapidly changing world.\n\nWhether your interest is technology, strategy or the aircraft themselves, it is the definitive guide to the people and machines safeguarding US skies into 2027 and beyond.",
+        highlights: [
+          "Front-Line Combat Review: In-depth coverage of stealth fighters, bombers, and strike wings.",
+          "Specialised Commands: Profiles of tactical airlift, refuellers, and special operations units.",
+          "Future Force Trajectory: Upgrades, next-generation trainers, and unmanned fleet integration.",
+          "Definitive Analysis: Comprehensive unit rosters, bases, and operational inventories."
+        ],
+        glowColor: "rgba(2, 132, 199, 0.25)"
+      },
+      {
+        id: "airliner-classics-13",
+        title: "Airliner Classics Volume 13",
+        shortTitle: "Airliner Classics 13",
+        subtitleTag: "From the Makers of Airliner World",
+        coverImage: "9781836323372.jpg",
+        spreadImage: "airliner-classics-dps.jpg",
+        price: "£9.99",
+        isbn: "9781836323372",
+        format: "Paperback / Softback (A4)",
+        pages: "116 Pages",
+        releaseDate: "Autumn 2026",
+        shopUrl: "https://shop.keypublishing.com",
+        standfirst: "Step back into the golden age of commercial aviation with comprehensive historical chronicles of pioneering airlines, routes, and classic transport airliners.",
+        fullSynopsis: "We step back in time once again with the return of our much-loved Airliner Classics series, a publication dedicated to bringing you an in-depth look at commercial aviation from a bygone era.\n\nThe latest 116-page special, brought to you by the industry-leading Airliner World magazine editorial team, is packed with historical stories, led by a detailed focus on Qantas and the legendary Kangaroo Route, alongside the fascinating story of the pioneer carriers that merged to form American Airlines.",
+        highlights: [
+          "The Kangaroo Route: The complete history and operational romance of Qantas' flagship journey.",
+          "Pioneers of Flight: The formative regional carriers that merged into American Airlines.",
+          "Golden Age Transports: Propeller and early turbojet airliners explored in deep technical detail.",
+          "Archival Photography: Rare ramp shots, vintage cabin layouts, and period promotional ephemera."
+        ],
+        glowColor: "rgba(5, 150, 105, 0.2)"
+      },
+      {
+        id: "supercars-10s-20s",
+        title: "Supercars of the 10s & 20s",
+        shortTitle: "Supercars 10s & 20s",
+        subtitleTag: "Automotive Special",
+        coverImage: "9781836323389.jpg",
+        spreadImage: "supercars-dps.jpg",
+        price: "£10.99",
+        isbn: "9781836323389",
+        format: "Paperback / Softback (A4)",
+        pages: "116 Pages",
+        releaseDate: "Autumn 2026",
+        shopUrl: "https://shop.keypublishing.com",
+        standfirst: "Celebrating the era when raw internal combustion, hybrid technology and radical aerodynamics converged to redefine the global hypercar frontier.",
+        fullSynopsis: "Supercars of the 10s & 20s celebrates the era when raw performance, hybrid technology and advanced aerodynamics converged to redefine the hypercar frontier.\n\nFrom the dawn of the hybrid holy trinity to the emergence of pure-electric hypercars, it traces the rise of marques pushing speed, handling and engineering audacity to unprecedented extremes.\n\nDetailed features explore cutting-edge powertrains, carbon-fibre innovation, motorsport lineage and the visionaries behind the machines, while stunning photography captures their presence on road and track. Covering definitive benchmark-setters, ultra-exclusive boutique creations and track-honed specials, this bookazine places each car in its cultural context, revealing how these two fast-moving decades reshaped the modern performance landscape and why they continue to captivate enthusiasts and collectors worldwide.",
+        highlights: [
+          "The Holy Trinity: The paradigm-shifting engineering of the LaFerrari, P1, and 918 Spyder.",
+          "Pure Electric Hypercars: The 2,000bhp electrified monsters redefining acceleration records.",
+          "Carbon-Fibre Innovations: Radical active aero, lightweight chassis, and track-only specials.",
+          "Boutique Audacity: Low-volume craftsmanship from Pagani, Koenigsegg, and bespoke builders."
+        ],
+        glowColor: "rgba(225, 29, 72, 0.25)"
+      },
+      {
+        id: "record-breaking-planes",
+        title: "Record Breaking Planes",
+        shortTitle: "Record Breakers",
+        subtitleTag: "Aviation at its Absolute Limits",
+        coverImage: "978 1 83632 385 3.jpg",
+        spreadImage: "record-breakers-dps.jpg",
+        price: "£10.99",
+        isbn: "9781836323853",
+        format: "Paperback / Softback (A4)",
+        pages: "116 Pages",
+        releaseDate: "Autumn 2026",
+        shopUrl: "https://shop.keypublishing.com",
+        standfirst: "Faster than sound, higher than the atmosphere, farther than the horizon. A celebration of the extreme machines and individuals that redefined aviation boundaries.",
+        fullSynopsis: "Record Breaking Planes is a celebration of aviation and aerospace at its absolute limits. This bookazine explores the machines, missions and individuals that have pushed flight beyond accepted boundaries – faster than sound, higher than the atmosphere, farther than the horizon, and bigger than anyone thought practical.\n\nFrom the rocket-powered breakthroughs of the Bell X-1 and North American X-15 to the operational extremes of the Lockheed SR-71 Blackbird and the global ambition of Concorde, the title builds a coherent narrative around humanity’s pursuit of performance, spanning experimental X-planes, Cold War icons and record setting airliners.",
+        highlights: [
+          "Rocket Breakthroughs: Breaking the sound barrier with the Bell X-1 and the hypersonic X-15.",
+          "Mach 3 Operational Icons: The engineering marvel of the titanium Lockheed SR-71 Blackbird.",
+          "Commercial Supersonic Flight: The transatlantic triumph and operational legacy of Concorde.",
+          "Giant Freighters & Extreme Range: The largest, heaviest, and longest-endurance airframes in history."
+        ],
+        glowColor: "rgba(147, 51, 234, 0.25)"
+      },
+      {
+        id: "flypast-air-combat",
+        title: "FlyPast Air Combat Compendium",
+        shortTitle: "Air Combat",
+        subtitleTag: "Curated by Jamie Ewan",
+        coverImage: "9781836323402.jpg",
+        spreadImage: "flypast-combat-dps.jpg",
+        price: "£10.99",
+        isbn: "9781836323402",
+        format: "Paperback / Softback (A4)",
+        pages: "116 Pages",
+        releaseDate: "Autumn 2026",
+        shopUrl: "https://shop.keypublishing.com",
+        standfirst: "The most gripping, authoritative and visually arresting air combat stories ever published in FlyPast, spanning the First World War to modern jet dogfights.",
+        fullSynopsis: "The FlyPast Air Combat Compendium draws together the most gripping, authoritative and visually arresting air combat stories ever published in FlyPast. Curated and edited by Jamie Ewan, the volume will showcase first-hand accounts, expert analysis and rare photography spanning the First World War to modern jet warfare.\n\nFrom dogfights over the Western Front and the Battle of Britain, to MiG encounters over Korea and Vietnam, Cold War interceptions and Middle East conflicts, this is the best of the most dramatic missions, the finest writing, and the most revealing operational analysis from the archive.",
+        highlights: [
+          "First-Hand Aerial Encounters: Gripping dogfight narratives over the Western Front and Britain.",
+          "Jet-Era MiG Battles: Supersonic intercept duels over MiG Alley in Korea and Vietnam skies.",
+          "Cold War Interceptions: High-altitude standoff missions and tense international airspace scrambles.",
+          "FlyPast Archival Depth: Curated operational records and rare combat action photography."
+        ],
+        glowColor: "rgba(220, 38, 38, 0.25)"
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function renderTabs() {
+      const container = document.getElementById('tabsContainer');
+      container.innerHTML = publications.map((pub, idx) => {
+        const isActive = idx === currentIndex;
+        const activeClass = "bg-amber-500 text-slate-950 font-bold shadow-md";
+        const inactiveClass = "text-slate-400 hover:text-slate-200 hover:bg-slate-800/60";
+        
+        return `
+          <button onclick="switchBook(${idx})" class="flex items-center gap-2 px-4 py-2 rounded-xl font-display text-xs sm:text-sm tracking-wide transition-all whitespace-nowrap ${isActive ? activeClass : inactiveClass}">
+            <span>${pub.shortTitle || pub.title}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderShowcase(index) {
+      const pub = publications[index];
+      currentIndex = index;
+
+      document.getElementById('displayTitle').innerText = pub.title;
+      document.getElementById('displaySubtitleTag').innerText = pub.subtitleTag;
+      document.getElementById('displayCover').src = pub.coverImage;
+      document.getElementById('displayCover').alt = pub.title;
+      document.getElementById('displayStandfirst').innerText = pub.standfirst;
+      document.getElementById('displayPriceBadge').innerText = pub.price;
+      document.getElementById('displayBuyBtn').href = pub.shopUrl;
+      document.getElementById('displayBadge').innerText = `A4 | ${pub.pages.toUpperCase()}`;
+      document.getElementById('ambientGlow').style.backgroundColor = pub.glowColor;
+
+      const specsHtml = `
+        <div class="bg-slate-900/70 p-2.5 rounded-lg border border-slate-800">
+          <span class="text-[10px] text-slate-500 uppercase tracking-wider block">Price</span>
+          <span class="text-sm font-semibold text-white">${pub.price}</span>
+        </div>
+        <div class="bg-slate-900/70 p-2.5 rounded-lg border border-slate-800">
+          <span class="text-[10px] text-slate-500 uppercase tracking-wider block">Format</span>
+          <span class="text-sm font-semibold text-white">A4 Bookazine</span>
+        </div>
+        <div class="bg-slate-900/70 p-2.5 rounded-lg border border-slate-800">
+          <span class="text-[10px] text-slate-500 uppercase tracking-wider block">Pages</span>
+          <span class="text-sm font-semibold text-white">${pub.pages}</span>
+        </div>
+        <div class="bg-slate-900/70 p-2.5 rounded-lg border border-slate-800">
+          <span class="text-[10px] text-slate-500 uppercase tracking-wider block">ISBN</span>
+          <span class="text-sm font-semibold font-mono text-white truncate block" title="${pub.isbn}">${pub.isbn}</span>
+        </div>
+      `;
+      document.getElementById('displaySpecs').innerHTML = specsHtml;
+
+      document.getElementById('displayHighlights').innerHTML = pub.highlights.map(item => `
+        <li class="flex items-start gap-2.5">
+          <svg class="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+          <span>${item}</span>
+        </li>
+      `).join('');
+    }
+
+    function switchBook(index) {
+      renderShowcase(index);
+      renderTabs();
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Editorial Synopsis Modal
+    function openFeatureModal() {
+      const pub = publications[currentIndex];
+      document.getElementById('modalTitle').innerText = pub.title;
+      document.getElementById('modalEyebrow').innerText = pub.subtitleTag;
+      document.getElementById('modalBody').innerHTML = pub.fullSynopsis.split('\n\n').map(p => `<p>${p}</p>`).join('');
+      document.getElementById('editorialModal').classList.remove('hidden');
+    }
+
+    function closeFeatureModal() {
+      document.getElementById('editorialModal').classList.add('hidden');
+    }
+
+    // Double Page Spread (DPS) Lightbox Controller
+    function openSpreadModal() {
+      const pub = publications[currentIndex];
+      const spreadSrc = pub.spreadImage || pub.coverImage;
+      
+      document.getElementById('spreadModalTitle').innerText = pub.title;
+      const spreadImgEl = document.getElementById('spreadImageEl');
+      
+      spreadImgEl.onerror = function() {
+        this.onerror = null;
+        this.src = pub.coverImage;
+      };
+      
+      spreadImgEl.src = spreadSrc;
+      document.getElementById('spreadModal').classList.remove('hidden');
+    }
+
+    function closeSpreadModal() {
+      document.getElementById('spreadModal').classList.add('hidden');
+    }
+
+    function handleSpreadBackdropClick(e) {
+      if (e.target.id === 'spreadModal') {
+        closeSpreadModal();
+      }
+    }
+
+    // Keyboard navigation (Esc to close open modals)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeSpreadModal();
+        closeFeatureModal();
+      }
+    });
+
+    // Render Lower Catalogue Grid
+    function renderCatalogGrid() {
+      const container = document.getElementById('catalogCardsContainer');
+      container.innerHTML = publications.map((pub, idx) => `
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition">
+          <div>
+            <div class="aspect-[1/1.414] w-full mb-5 overflow-hidden rounded-xl bg-slate-950 flex items-center justify-center border border-slate-800 shadow-inner">
+              <img src="${pub.coverImage}" alt="${pub.title}" class="w-full h-full object-contain">
+            </div>
+            <span class="text-[10px] font-semibold tracking-widest uppercase text-amber-400 block">${pub.subtitleTag}</span>
+            <h3 class="font-serif text-lg font-bold text-white mt-1 leading-snug">${pub.title}</h3>
+            <p class="text-xs text-slate-400 mt-2 line-clamp-3 leading-relaxed">${pub.standfirst}</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between gap-2">
+            <button onclick="switchBook(${idx}); scrollToSection('showcase');" class="text-xs text-slate-300 hover:text-white font-medium">Spotlight View</button>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-white">${pub.price}</span>
+              <a href="${pub.shopUrl}" target="_blank" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-bold text-xs uppercase tracking-wider transition">
+                Order
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 3D Card Hover Mechanism
+    const tiltCard = document.getElementById('tiltWrapper');
+    const glareOverlay = document.getElementById('glareOverlay');
+
+    tiltCard.addEventListener('mousemove', (e) => {
+      const rect = tiltCard.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -12;
+      const rotateY = ((x - centerX) / centerX) * 12;
+
+      tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      glareOverlay.style.opacity = '1';
+      glareOverlay.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.2) 0%, transparent 60%)`;
+    });
+
+    tiltCard.addEventListener('mouseleave', () => {
+      tiltCard.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      glareOverlay.style.opacity = '0';
+    });
+
+    // Initialise on load
+    renderShowcase(0);
+    renderTabs();
+    renderCatalogGrid();
+  </script>
+</body>
+</html>
