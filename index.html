@@ -421,7 +421,8 @@
       document.getElementById('displayPriceBadge').innerText = pub.price;
       document.getElementById('displayBuyBtn').href = pub.shopUrl;
       document.getElementById('displayBadge').innerText = `A4 | ${pub.pages.toUpperCase()}`;
-      document.getElementById('ambientGlow').style.backgroundColor = pub.glowColor;
+      // Smart fallback: uses pub.glowColor if provided, otherwise defaults to warm amber/gold
+document.getElementById('ambientGlow').style.backgroundColor = pub.glowColor || 'rgba(217, 119, 6, 0.2)';
 
       const specsHtml = `
         <div class="bg-slate-900/70 p-2.5 rounded-lg border border-slate-800">
